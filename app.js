@@ -11,7 +11,7 @@ function display() {
     .then((information) => {
      const heroList = information.map(function (stuff) {
         return `
-      <a onclick='additionalInfo("${stuff.name}")'>
+      <a onclick='additionalInfo("${stuff.key}")'>
       <div id="card">
       <img src="${stuff.portrait}" class = "card" id="card-img-top" alt="...">
       <div id="card-body">
@@ -27,7 +27,7 @@ function display() {
 display();
 
 function additionalInfo(heroName) {
-  fetch(`https://overfast-api.tekrop.fr/heroes/${heroName.toLowerCase()}`, {
+  fetch(`https://overfast-api.tekrop.fr/heroes/${heroName}`, {
     method: "GET",
   })
     .then((response) => response.json())
