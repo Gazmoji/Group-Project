@@ -11,5 +11,5 @@ fetch("https://overfast-api.tekrop.fr/heroes")
         <div>${stuff.role}</div>
         <img src="${stuff.portrait}"></li>`;
     });
-    ul.innerHTML = heroList;
+    ul.innerHTML = heroList.join("");
   });
