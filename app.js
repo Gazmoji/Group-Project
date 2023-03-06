@@ -36,20 +36,29 @@ function additionalInfo(heroName) {
     .then((response) => response.json())
     .then((information) => {
       const heroList = `<li>
-        <b>Name: ${information.name}</b>
+      <div>
+        <h2>Name: ${information.name}</h2>
+        </div>
         <p>About: ${information.description}</p>
-        <img src=${information.portrait}>
-        <h2>Role: ${information.role}</h2>
+        <img src=${information.portrait} id='port'>
+        <div>
+        <h3 id='role'>Role: ${information.role}</h3>
+        </div>
         <p>Location: ${information.location}</p>
-        <p>Origin Story: ${information.story.summary}</p>
+        <p id='origin'>Origin Story: ${information.story.summary}</p>
 </li>`;
       let abilities = information.abilities;
       const heroAbilities = abilities.map(function (abil) {
-        return `<li>
-        <img src=${abil.icon}>
-        <h3>Ability Name: ${abil.name}</h3>
-        <p>Description: ${abil.description}</p>
-        </li>`;
+        return `<div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card">
+            <img src=${abil.icon} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${abil.name}</h5>
+              <p class="card-text">${abil.description}</p>
+            </div>
+          </div>
+        </div>`;
       });
       additional.innerHTML = heroList;
       abilityList.innerHTML = heroAbilities.join("");

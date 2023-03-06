@@ -93,3 +93,50 @@ a:focus {
 ul {
   list-style-type: none;
 }
+
+h1 {
+  text-align: center;
+}
+
+#additional {
+  padding-top: 25px;
+}
+
+#abilityList {
+  padding: 50px;
+}
+
+.card-img-top {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  text-align: center;
+}
+
+.card-text {
+  text-align: center;
+}
+
+.card-title {
+  text-align: center;
+}
+
+#role {
+  padding-top: 25px;
+}
+
+#origin {
+  font-stretch: expanded;
+  font-size: 18px;
+}
+
+.card {
+  width: 250px;
+  height: 250px;
+  justify-content: center;
+}
+
+.port {
+  border: 3px gray;
+}
