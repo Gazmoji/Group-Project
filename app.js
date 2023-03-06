@@ -1,4 +1,5 @@
 const body = document.getElementById("body");
+const body2 = document.getElementById("body2");
 const card = document.getElementById("card");
 const cardBody = document.getElementById("cardBody");
 const cardtitle = document.getElementById("card-title");
@@ -62,6 +63,28 @@ function additionalInfo(heroName) {
       });
       additional.innerHTML = heroList;
       abilityList.innerHTML = heroAbilities.join("");
-      console.log(heroList);
     });
 }
+
+function displayLeague() {
+  fetch(
+    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+  )
+    .then((response) => response.json())
+    .then((information) => {
+      let champData = information.data;
+      let champList = "";
+      for (let champ in champData) {
+        champList += `<div id="card">
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+    <div id="card-body">
+      <h5 id="card-title">${champData[champ].name}</h5>
+    </div>
+  </div>`;
+      }
+      body2.innerHTML = champList;
+      console.log(champData);
+    });
+}
+
+displayLeague();

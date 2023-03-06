@@ -227,3 +227,11 @@ a:focus {
 #card-text {
   color: #b7b7b7;
 }
+
+#body2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 2rem;
+}
