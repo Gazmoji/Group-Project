@@ -1,5 +1,7 @@
 const body = document.getElementById("body");
 const body2 = document.getElementById("body2");
+const selected = document.getElementById("selected");
+const clear = document.getElementById("clear");
 const card = document.getElementById("card");
 const cardBody = document.getElementById("cardBody");
 const cardtitle = document.getElementById("card-title");
@@ -35,6 +37,7 @@ display();
 
 function additionalInfo(heroName) {
   counterColors(heroName)
+  displayCurrent(heroName)
   fetch(`https://overfast-api.tekrop.fr/heroes/${heroName}`, {
     method: "GET",
   })
@@ -67,8 +70,24 @@ function additionalInfo(heroName) {
       });
       additional.innerHTML = heroList;
       abilityList.innerHTML = heroAbilities.join("");
+      
     });
 }
+
+function displayCurrent(heroName) {
+  fetch(`https://overfast-api.tekrop.fr/heroes/${heroName}`, {
+    method: "GET",
+  })
+    .then((response) => response.json())
+    .then((information) => {
+      const current = `
+      <div id="currentSelected">${information.name} counters</div>
+      <button id="clear">Clear</button>`    
+        selected.innerHTML = current
+  })
+  
+}
+
 
 function displayLeague() {
   fetch(
@@ -181,4 +200,8 @@ function additionalLeagueInfo(champName) {
       }
       additional2.innerHTML = leagueList;
     });
+}
+
+const leagueCharacterComparisons = {
+  
 }
