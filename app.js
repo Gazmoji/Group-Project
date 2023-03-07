@@ -5,6 +5,7 @@ const cardBody = document.getElementById("cardBody");
 const cardtitle = document.getElementById("card-title");
 const ul = document.getElementById("ul");
 const additional = document.getElementById("additional");
+const additional2 = document.getElementById("additional2");
 const abilityList = document.getElementById("abilityList");
 
 function display() {
@@ -75,10 +76,12 @@ function displayLeague() {
       let champData = information.data;
       let champList = "";
       for (let champ in champData) {
-        champList += `<div id="card">
+        champList += `<a onclick='additionalLeagueInfo("${champData[champ].name}")'>
+        <div id="card">
         <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
     <div id="card-body">
       <h5 id="card-title">${champData[champ].name}</h5>
+      </a>
     </div>
   </div>`;
       }
@@ -88,3 +91,29 @@ function displayLeague() {
 }
 
 displayLeague();
+
+function additionalLeagueInfo(champName) {
+  fetch(
+    `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
+    {
+      method: "GET",
+    }
+  )
+    .then((response) => response.json())
+    .then((information) => {
+      console.log(information);
+      let champData = information.data;
+      let leagueList = "";
+      for (let champ in champData) {
+        leagueList += `<li>
+      <div>
+      <h2>Champion: ${champData[champ].name}</h2>
+      </div>
+      <p id='blurb'>About: ${champData[champ].blurb}</p>
+      <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" id='port'>
+      <p id='origin'>Lore: ${champData[champ].lore}</p>
+      </li>`;
+      }
+      additional2.innerHTML = leagueList;
+    });
+}

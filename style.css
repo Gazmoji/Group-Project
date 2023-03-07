@@ -235,3 +235,7 @@ a:focus {
   align-items: center;
   margin-top: 2rem;
 }
+
+#blurb {
+  font-size: 20px;
+}
