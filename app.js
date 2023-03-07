@@ -93,20 +93,27 @@ function displayLeague() {
 function counterColors(heroName) {
   const listOfAllCharactersAnaCanBeat = characterComparisons["ana"]
 
-  const counterList = characters.map(function (character) {
-    return `
-  <a id="cardButton" onclick='additionalInfo("${character.key}")'>
-  <div id="card" class= 'card green' >
-  <img src="${character.portrait}" class = "card" id="card-img-top" alt="...">
-  <div id="card-body">
-    <h5 id="card-title">${character.name}</h5>
-    <p id="card-text">${character.role}</p>
-    </a>
-  </div>
-</div>`;
-  });
-  console.log(counterList)
-  body.innerHtml = counterList.join('')
+  fetch("https://overfast-api.tekrop.fr/heroes")
+    .then((response) => response.json())
+    .then((information) => {
+      characters = information
+      // information.map((hero_key) => additionalInfo(hero_key))
+
+
+      const heroList = information.map(function (stuff) {
+        return `
+      <a id="cardButton" onclick='additionalInfo("${stuff.key}")'>
+      <div class = ${listOfAllCharactersAnaCanBeat.includes(stuff.key) ? "red-border" : "default-background"}>
+      <img src="${stuff.portrait}" class = "card" id="card-img-top" alt="...">
+      <div id="card-body">
+        <h5 id="card-title">${stuff.name}</h5>
+        <p id="card-text">${stuff.role}</p>
+        </a>
+      </div>
+    </div>`;
+      });
+      body.innerHTML = heroList.join("");
+    });
 
   const listOfAllCharactersDvaCanBeat = characterComparisons["dva"]
   const listOfAllCharactersDoomfistCanBeat = characterComparisons["doomfist"]
@@ -115,7 +122,7 @@ function counterColors(heroName) {
   const listOfAllCharactersReinhardtCanBeat = characterComparisons["reinhardt"]
   const listOfAllCharactersRoadhogCanBeat = characterComparisons["roadhog"]
   const listOfAllCharactersSigmaCanBeat = characterComparisons["sigma"]
-  const listOfAllCharactersWinstonCanBeat = characterComparisons["winston"]
+  const listOfAllCharacterswinstonCanBeat = characterComparisons["winston"]
   const listOfAllCharactersWreckingBallCanBeat = characterComparisons["wrecking-ball"]
   const listOfAllCharactersZaryaCanBeat = characterComparisons["zarya"]
   const listOfAllCharactersAsheCanBeat = characterComparisons["ashe"]

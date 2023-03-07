@@ -25,6 +25,29 @@ body {
   animation: fade-in 0.75s ease-out forwards;
   padding: auto;
 }
+.default-background {
+  margin-bottom: 2rem;
+  border: 10px solid #4e4b4b;
+  border-radius: 0.5rem;
+  width: 10%;
+  transition: all 0.3s ease-out;
+  transform: scale(1);
+  opacity: 50%;
+  animation: fade-in 0.75s ease-out forwards;
+  padding: auto;
+}
+
+.red-border {
+  margin-bottom: 2rem;
+  border: 10px solid #c91d1d;
+  border-radius: 0.5rem;
+  width: 10%;
+  transition: all 0.3s ease-out;
+  transform: scale(1);
+  opacity: 50%;
+  animation: fade-in 0.75s ease-out forwards;
+  padding: auto;
+}
 
 @keyframes fade-in {
   from {
