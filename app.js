@@ -91,19 +91,16 @@ function displayLeague() {
 }
 
 function counterColors(heroName) {
-  const listOfAllCharactersAnaCanBeat = characterComparisons["ana"]
+  const listOfAllCharactersHeroCanBeat = characterComparisons[heroName]
 
   fetch("https://overfast-api.tekrop.fr/heroes")
     .then((response) => response.json())
     .then((information) => {
       characters = information
-      // information.map((hero_key) => additionalInfo(hero_key))
-
-
       const heroList = information.map(function (stuff) {
         return `
       <a id="cardButton" onclick='additionalInfo("${stuff.key}")'>
-      <div class = ${listOfAllCharactersAnaCanBeat.includes(stuff.key) ? "red-border" : "default-background"}>
+      <div class = ${listOfAllCharactersHeroCanBeat.includes(stuff.key) ? "red-border" : "default-background"}>
       <img src="${stuff.portrait}" class = "card" id="card-img-top" alt="...">
       <div id="card-body">
         <h5 id="card-title">${stuff.name}</h5>
@@ -114,43 +111,7 @@ function counterColors(heroName) {
       });
       body.innerHTML = heroList.join("");
     });
-
-  const listOfAllCharactersDvaCanBeat = characterComparisons["dva"]
-  const listOfAllCharactersDoomfistCanBeat = characterComparisons["doomfist"]
-  const listOfAllCharactersjunkerQueenCanBeat = characterComparisons["junker-queen"]
-  const listOfAllCharactersOrisaCanBeat = characterComparisons["orisa"]
-  const listOfAllCharactersReinhardtCanBeat = characterComparisons["reinhardt"]
-  const listOfAllCharactersRoadhogCanBeat = characterComparisons["roadhog"]
-  const listOfAllCharactersSigmaCanBeat = characterComparisons["sigma"]
-  const listOfAllCharacterswinstonCanBeat = characterComparisons["winston"]
-  const listOfAllCharactersWreckingBallCanBeat = characterComparisons["wrecking-ball"]
-  const listOfAllCharactersZaryaCanBeat = characterComparisons["zarya"]
-  const listOfAllCharactersAsheCanBeat = characterComparisons["ashe"]
-  const listOfAllCharactersBastionCanBeat = characterComparisons["bastion"]
-  const listOfAllCharactersCassidyCanBeat = characterComparisons["cassidy"]
-  const listOfAllCharactersEchoCanBeat = characterComparisons["echo"]
-  const listOfAllCharactersGenjiCanBeat = characterComparisons["genji"]
-  const listOfAllCharactersHanzoCanBeat = characterComparisons["hanzo"]
-  const listOfAllCharactersJunkratCanBeat = characterComparisons["junkrat"]
-  const listOfAllCharactersMeiCanBeat = characterComparisons["mei"]
-  const listOfAllCharactersPharahCanBeat = characterComparisons["pharah"]
-  const listOfAllCharactersReaperCanBeat = characterComparisons["reaper"]
-  const listOfAllCharactersSoujurnCanBeat = characterComparisons["soujurn"]
-  const listOfAllCharactersSoldier76CanBeat = characterComparisons["soldier-76"]
-  const listOfAllCharactersSombraCanBeat = characterComparisons["sombra"]
-  const listOfAllCharactersSymmetraCanBeat = characterComparisons["symmetra"]
-  const listOfAllCharactersTorbjornCanBeat = characterComparisons["torbjorn"]
-  const listOfAllCharactersTracerCanBeat = characterComparisons["tracer"]
-  const listOfAllCharactersWidowmakerCanBeat = characterComparisons["widowmaker"]
-  const listOfAllCharactersBaptisteCanBeat = characterComparisons["baptiste"]
-  const listOfAllCharactersBridgetteCanBeat = characterComparisons["bridgette"]
-  const listOfAllCharactersKirikoCanBeat = characterComparisons["kiriko"]
-  const listOfAllCharactersLucioCanBeat = characterComparisons["lucio"]
-  const listOfAllCharactersMercyCanBeat = characterComparisons["mercy"]
-  const listOfAllCharactersMoiraCanBeat = characterComparisons["moira"]
-  const listOfAllCharactersZenyattaCanBeat = characterComparisons["zenyatta"]
-  const listOfAllCharactersRamattraCanBeat = characterComparisons["ramattra"]
-}
+  }
 
 
 const characterComparisons = {
