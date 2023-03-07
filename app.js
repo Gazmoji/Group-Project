@@ -6,6 +6,7 @@ const cardtitle = document.getElementById("card-title");
 const ul = document.getElementById("ul");
 const additional = document.getElementById("additional");
 const additional2 = document.getElementById("additional2");
+const additional3 = document.getElementById("additional3");
 const abilityList = document.getElementById("abilityList");
 
 function display() {
@@ -76,7 +77,7 @@ function displayLeague() {
       let champData = information.data;
       let champList = "";
       for (let champ in champData) {
-        champList += `<a onclick='additionalLeagueInfo("${champData[champ].name}")'>
+        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
         <div id="card">
         <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
     <div id="card-body">
@@ -103,17 +104,46 @@ function additionalLeagueInfo(champName) {
     .then((information) => {
       console.log(information);
       let champData = information.data;
+      console.log(champData);
       let leagueList = "";
+      console.log(abilityList);
+
       for (let champ in champData) {
         leagueList += `<li>
-      <div>
+      
       <h2>Champion: ${champData[champ].name}</h2>
-      </div>
+      
       <p id='blurb'>About: ${champData[champ].blurb}</p>
       <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" id='port'>
       <p id='origin'>Lore: ${champData[champ].lore}</p>
+      <p id='origin'>Resource Type: ${champData[champ].partype}</p>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">${champData[champ].passive.name}</h5>
+              <p class="card-text" id='passiveDesc'>${champData[champ].passive.description}</p>
+              </div>
+              </div>
+              </div>
+              </div>
       </li>`;
+
+        let leagueAbilities = champData[champ].spells.map(function (abil) {
+          return `<div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+          <div class="card">
+            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${abil.name}</h5>
+              <p class="card-text" id='descriptionText'>${abil.description}</p>
+            </div>
+          </div>
+        </div>`;
+        });
+
+        additional2.innerHTML = leagueList;
+        additional3.innerHTML = leagueAbilities.join("");
       }
-      additional2.innerHTML = leagueList;
     });
 }
