@@ -82,8 +82,7 @@ function displayCurrent(heroName) {
     .then((response) => response.json())
     .then((information) => {
       const current = `
-      <div id="currentSelected">${information.name} counters</div>
-      <button id="clear">Clear</button>`    
+      <div id="currentSelected">${information.name} counters</div>`    
         selected.innerHTML = current
   })
   
