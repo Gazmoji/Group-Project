@@ -81,6 +81,7 @@ function displayLeague() {
       let champList = "";
       for (let champ in champData) {
         champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
+        
         <div id="card">
         <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
     <div id="card-body">
@@ -700,28 +701,22 @@ function additionalLeagueInfo(champName) {
       <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" id='port'>
       <p id='origin'>Lore: ${champData[champ].lore}</p>
       <p id='origin'>Resource Type: ${champData[champ].partype}</p>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div class="col">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">${champData[champ].passive.name}</h5>
               <p class="card-text" id='passiveDesc'>${champData[champ].passive.description}</p>
               </div>
-              </div>
-              </div>
-              </div>
-      </li>`;
+              </div>`;
 
         let leagueAbilities = champData[champ].spells.map(function (abil) {
-          return `<div class="row row-cols-1 row-cols-md-2 g-4">
+          return `
         <div class="col">
-          <div class="card">
-            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="...">
+          <div class="card mx-auto" id='abilitycard'>
+            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="..." id='abilImage'>
             <div class="card-body">
               <h5 class="card-title">${abil.name}</h5>
               <p class="card-text" id='descriptionText'>${abil.description}</p>
             </div>
-          </div>
         </div>`;
         });
 

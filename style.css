@@ -518,3 +518,30 @@ a:focus {
 #blurb {
   font-size: 20px;
 }
+
+#descriptionText {
+  font-size: 15px;
+}
+
+#passiveDesc {
+  font-size: 12px;
+}
+
+#abilImage {
+  width: 60px;
+}
+
+#abilityCard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#port {
+  width: 230px;
+}
+
+#body2 {
+  width: 100%;
+}
