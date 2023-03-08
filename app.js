@@ -12,6 +12,8 @@ const additional3 = document.getElementById("additional3");
 const abilityList = document.getElementById("abilityList");
 let characters = []
 
+//OVERWATCH------------------------------------------------
+
 function display() {
   fetch("https://overfast-api.tekrop.fr/heroes")
     .then((response) => response.json())
@@ -87,30 +89,6 @@ function displayCurrent(heroName) {
   
 }
 
-
-function displayLeague() {
-  fetch(
-    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
-  )
-    .then((response) => response.json())
-    .then((information) => {
-      let champData = information.data;
-      let champList = "";
-      for (let champ in champData) {
-        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
-        <div id="card">
-        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
-    <div id="card-body">
-      <h5 id="card-title">${champData[champ].name}</h5>
-      </a>
-    </div>
-  </div>`;
-      }
-      body2.innerHTML = champList;
-      console.log(champData);
-    });
-}
-
 function counterColors(heroName) {
   const listOfAllCharactersHeroCanBeat = characterComparisons[heroName]
 
@@ -173,9 +151,34 @@ const characterComparisons = {
   'zenyatta': ['dva', 'doomfist', 'junker-queen', 'orisa', 'ramattra', 'reinhardt', 'roadhog', 'winston', 'wrecking-ball', 'zarya',	'echo', 'genji', 'pharah', 'sombra', 'tracer', 'widowmaker',	'brigitte', 'kiriko', 'lucio', 'moira'], 
 }
 
+//LEAGUE OF LEGENDS------------------------------------------------
+
+function displayLeague() {
+  fetch(
+    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+  )
+    .then((response) => response.json())
+    .then((information) => {
+      let champData = information.data;
+      let champList = "";
+      for (let champ in champData) {
+        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
+        <div id="leagueCard">
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+    <div id="card-body">
+      <h5 id="leagueCard-title">${champData[champ].name}</h5>
+      </a>
+    </div>
+  </div>`;
+      }
+      body2.innerHTML = champList;
+    });
+}
+
 displayLeague();
 
 function additionalLeagueInfo(champName) {
+  leagueCounterColors(champName)
   fetch(
     `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
     {
@@ -186,9 +189,7 @@ function additionalLeagueInfo(champName) {
     .then((information) => {
       console.log(information);
       let champData = information.data;
-      console.log(champData);
       let leagueList = "";
-      console.log(abilityList);
 
       for (let champ in champData) {
         leagueList += `<li>
@@ -230,6 +231,31 @@ function additionalLeagueInfo(champName) {
     });
 }
 
+function leagueCounterColors(champName) {
+  const listOfAllChampsSelectedCanBeat = leagueCharacterComparisons[champName]
+  fetch(
+    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+  )
+    .then((response) => response.json())
+    .then((information) => {
+      let champData = information.data;
+      let champList = "";
+      for (let champ in champData) {
+        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
+        <div class = ${listOfAllChampsSelectedCanBeat.includes(champData[champ].id) ? "leagueRed-border" : "leagueDefault-background"}>
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+    <div id="card-body">
+      <h5 id="card-title">${champData[champ].name}</h5>
+      </a>
+    </div>
+  </div>`;
+      }
+      body2.innerHTML = champList;
+      console.log(champData);
+    });
+
+}
+
 const leagueCharacterComparisons = {
 'Aatrox' : ['Poppy',	'Pyke', 'Kindred',	'Zoe', 'TwistedFate',	'Jax'], 
 'Ahri' : ['Swain',	'Kassadin','Illaoi',	'Malzahar', 'Talon',	'Veigar'], 
@@ -255,7 +281,7 @@ const leagueCharacterComparisons = {
 'Corki': ['Zed', 'LeBlanc', 'Yasuo', 'Fizz', 'Diana', 'Ekko'],
 'Darius' : ['Renekton',	'Vayne', 'Ashe',	'Sejuani', 'Elise',	'Zilean'], 
 'Diana' : ['Fiora',	'Jax', 'Chogath',	'Karma', 'Irelia',	'Riven'], 
-'DrMundo' : ['Vayne', 'Kogmaw', 'Trundle', 'Fiora', 'Illaoi', 'Olaf'], 
+'DrMundo' : ['Vayne', 'KogMaw', 'Trundle', 'Fiora', 'Illaoi', 'Olaf'], 
 'Draven' : [ 'Thresh',	'Blitzcrank', 'Varus',	'Nami', 'Vi',	'Darius'], 
 'Ekko' : ['Fiora',	'LeBlanc', 'Malzahar',	'Vladimir', 'Kassadin',	'Yorick'], 
 'Elise' : ['Udyr', 'Maokai', 'Hecarim', 'Zed', 'Khazix', 'Amumu'], 
@@ -271,18 +297,18 @@ const leagueCharacterComparisons = {
 'Gragas' : ['Rammus', 'Warwick', 'Nunu', 'Fiddlesticks', 'Maokai', 'Kayn'], 
 'Graves' : ['Lillia', 'Zed', 'Karthus', 'Kayn', 'Nidalee', 'Belveth'], 
 'Gwen' : ['Irelia',	'Tryndamere', 'Olaf',	'Kled', 'Sett',	'Renekton'], 
-'Hecarim' : ['Reksai', 'Skarner', 'XinZhao', 'Nidalee', 'Maokai', 'Zac'], 
+'Hecarim' : ['RekSai', 'Skarner', 'XinZhao', 'Nidalee', 'Maokai', 'Zac'], 
 'Heimerdinger' : ['Twitch', 'Shaco', 'Annie', 'Yuumi', 'Pyke', 'Lulu'], 
 'Illaoi' : ['Akshan', 'Kled', 'Tryndamere', 'Quinn', 'Chogath'], 
 'Irelia' : [ 'Olaf',	'Udyr', 'Singed',	'Darius', 'Garen',	'Chogath'], 
 'Ivern' : ['Talon', 'Rammus', 'Graves', 'Nunu', 'Maokai', 'Karthus'], 
 'Janna' : ['Sona', 'Velkoz', 'Amumu', 'Lux', 'Zac', 'Braum'], 
-'JarvanIV' : ['Sylas', 'Udyr', 'Vi', 'Reksai', 'Hecarim', 'Kindred'], 
+'JarvanIV' : ['Sylas', 'Udyr', 'Vi', 'RekSai', 'Hecarim', 'Kindred'], 
 'Jax' : [ 'DrMundo',	'Singed', 'Ryze',	'Heimerdinger', 'Zac',	'Malphite'], 
 'Jayce' : [ 'Yorick',	'JarvanIV', 'Wukong',	'Ekko', 'XinZhao',	'Shaco'], 
 'Jhin' : ['Varus',	'Braum', 'Kayn',	'Shaco', 'LeBlanc',	'Wukong'], 
 'Jinx' : [ 'Kaisa',	'MasterYi', 'Katarina',	'Shaco', 'Thresh',	'Teemo'], 
-'Ksante' : ['Udyr', 'Akali', 'Tryndamere', 'Wukong', 'Yasuo', 'Irelia'], 
+'KSante' : ['Udyr', 'Akali', 'Tryndamere', 'Wukong', 'Yasuo', 'Irelia'], 
 'Kaisa' : [ 'Lucian',	'Caitlyn',  'Teemo',	'Vayne', 'Ahri',	'Anivia'], 
 'Kalista' : ['Lucian', 'Veigar', 'MissFortune', 'Tristana', 'Sivir', 'Twitch'], 
 'Karma' : ['Maokai', 'Braum', 'Soraka', 'Zilean', 'Seraphine', 'Bard'], 
@@ -295,7 +321,7 @@ const leagueCharacterComparisons = {
 'Khazix' : ['Maokai', 'Belveth', 'Nunu', 'Karthus', 'Rengar', 'Diana'], 
 'Kindred' : ['Viego', 'Kayn', 'Zed', 'Karthus', 'Evelynn', 'Elise'], 
 'Kled' : [ 'Shen',	'Pantheon', 'Poppy',	'TahmKench', 'Singed',	'Jax'], 
-'Kogmaw' : ['Sivir', 'Ashe', 'Kaisa', 'Varus', 'MissFortune', 'Twitch'], 
+'KogMaw' : ['Sivir', 'Ashe', 'Kaisa', 'Varus', 'MissFortune', 'Twitch'], 
 'LeBlanc' : ['Galio',	'Lissandra', 'Cassiopeia',	'Katarina', 'TwistedFate',	'Diana'], 
 'LeeSin' : ['Udyr',	'Trundle', 'Garen',	'Heimerdinger', 'Vladimir',	'Riven'], 
 'Leona' : ['Zilean', 'Rell', 'Zyra', 'Seraphine', 'Morgana', 'Pyke'], 
@@ -315,10 +341,10 @@ const leagueCharacterComparisons = {
 'Nasus' : ['Rumble',	'Ryze', 'Urgot',	'Lucian', 'Nami',	'Gangplank'], 
 'Nautilus' : ['braun', 'Rell', 'Swain', 'Heimerdinger', 'Leona', 'Zilean'], 
 'Neeko' : ['Anivia', 'Ekko', 'Tryndamere', 'Katarina', 'Fizz', 'Jayce'], 
-'Nidalee' : ['Taliyah', 'Poppy', 'Rengar', 'Reksai', 'Sylas', 'Evelynn'], 
+'Nidalee' : ['Taliyah', 'Poppy', 'Rengar', 'RekSai', 'Sylas', 'Evelynn'], 
 'Nilah' : [ 'Draven',	'Jhin', 'MissFortune',	'Wukong', 'Sivir',	'Vayne'], 
 'Nocturne' : ['Talon', 'Rammus', 'Viego', 'MasterYi', 'Wukong', 'Belveth'], 
-'Nunu' : ['Trundle', 'Kindred', 'Sejuani', 'Pantheon', 'Evelynn', 'Reksai'], 
+'Nunu' : ['Trundle', 'Kindred', 'Sejuani', 'Pantheon', 'Evelynn', 'RekSai'], 
 'Olaf' : ['Yasuo', 'Cassiopeia', 'Camille', 'Akali', 'Vladimir', 'Singed'], 
 'Orianna' : ['Xerath', 'Syndra', 'Velkoz', 'Qiyana', 'Akshan', 'Jayce'], 
 'Ornn' : ['Urgot', 'Nasus', 'Rengar', "Kled", 'TahmKench', 'Vayne'], 
@@ -329,12 +355,12 @@ const leagueCharacterComparisons = {
 'Quinn': ["KSante", "Shen", "Olaf", "Malphite", "Poppy", "Akali"],
 'Rakan': ["Morgana", "Braum", "Rell", "Lulu", "Leona", "Thresh"],
 'Rammus': ["Morgana", "Lilia", "Zac", "Shyvana", "Maokai", "Ekko"],
-'Reksai': ["Volibear", "Karthus", "Nocturne", "Warwick", "Rammus", "Ekko"],
-'Rell': ["RentaGlasc", "Janna", "Morgana", "Swain", "VelKoz", "Maokai"],
+'RekSai': ["Volibear", "Karthus", "Nocturne", "Warwick", "Rammus", "Ekko"],
+'Rell': ["RentaGlasc", "Janna", "Morgana", "Swain", "Velkoz", "Maokai"],
 'RenataGlasc': ["Soraka", "Amumu", "Blitzcrank", "Xerath", "Zilean", "Sona"],
 'Renekton': ["Alistar", "Trundle", "Quinn", "Elise", "Ryze", "Kennen"],
 'Rengar': ["Poppy", "RekSai", "Zac", "Sejuani", "Viego", "Fiddlesticks"],
-'Riven': ["Renekton", "Akshan", "Pantheon", "Kled", "ChoGath", "Sett"],
+'Riven': ["Renekton", "Akshan", "Pantheon", "Kled", "Chogath", "Sett"],
 'Rumble': ["Kled", "Ryze", "Shen", "Cassiopeia", "Urgot", "Camille"],
 'Ryze': ["Ziggs", "Anivia", "Swain", "Zoe", "Kassadin", "Talon"],
 'Samira': ["Xayah", "Veigar", "Nilah", "Kalista", "Varus", "Lucian"],
@@ -386,7 +412,7 @@ const leagueCharacterComparisons = {
 'Yone': ["Annie", "Irelia", "Zed", "Viego", "Fizz", "Lucian"],
 'Yorick': ["Aatrox", "XinZhao", "Chogath", "Nunu", "Trundle", "Nidalee"],
 'Yuumi': ["Blitzcrank", "Nautilus", "Bard", "Sona", "Senna", "Amumu"],
-'Zac': ["Ivern", "Reksai", "Shyvana", "Talon", "Nunu & Wilump", "Graves"],
+'Zac': ["Ivern", "RekSai", "Shyvana", "Talon", "Nunu", "Graves"],
 'Zed': ["Tryndamere", "Vladimir", "Kayle", "Lissandra", "Fiora", "Urgot"],
 'Zeri': ["Draven", "Kalista", "Tristana", "Caitlyn", "Lucian", "Yasuo"],
 'Ziggs': ["Jayce", "Qiyana", "Ekko", "Fizz", "Vex", "Lux"],
