@@ -39,6 +39,40 @@ body {
   padding: auto;
 }
 
+#currentSelected {
+  text-align: left;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 900;
+  font-size: 24px;
+  animation: fade-inSelected 0.75s ease-out forwards;
+  color: #a7a49a;
+  text-shadow: 0px 2px 2px rgba(0,0,0,0.5);
+}
+@keyframes fade-inSelected {
+  from {
+    opacity: 0;
+    transform: translatex(20rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(10rrem);
+  }
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translatex(20rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(10rrem);
+  }
+}
+
 .red-border {
   margin-bottom: 2rem;
   border: 10px solid #c91d1d;
@@ -53,11 +87,11 @@ body {
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translatex(20rem);
+    transform: translatex(2rem);
   }
   to {
     opacity: 1;
-    transform: translateY(10rrem);
+    transform: translateY(1rrem);
   }
 }
 
@@ -187,29 +221,6 @@ h1 {
   margin-top: 2rem;
 }
 
-#card {
-  margin-bottom: 2rem;
-  border: 10px solid #424141;
-  border-radius: 0.5rem;
-  width: 10%;
-  transition: all 0.3s ease-out;
-  transform: scale(1);
-  opacity: 0;
-  animation: fade-in 0.75s ease-out forwards;
-  padding: auto;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translatex(20rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(10rrem);
-  }
-}
-
 #card:hover {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
   transform: scale(1.05);
@@ -288,29 +299,6 @@ body {
   justify-content: space-around;
   align-items: center;
   margin-top: 2rem;
-}
-
-#card {
-  margin-bottom: 2rem;
-  border: 10px solid #424141;
-  border-radius: 0.5rem;
-  width: 10%;
-  transition: all 0.3s ease-out;
-  transform: scale(1);
-  opacity: 0;
-  animation: fade-in 0.75s ease-out forwards;
-  padding: auto;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translatex(20rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(10rrem);
-  }
 }
 
 #card:hover {
@@ -426,29 +414,6 @@ h1 {
   justify-content: space-around;
   align-items: center;
   margin-top: 2rem;
-}
-
-#card {
-  margin-bottom: 2rem;
-  border: 10px solid #424141;
-  border-radius: 0.5rem;
-  width: 10%;
-  transition: all 0.3s ease-out;
-  transform: scale(1);
-  opacity: 0;
-  animation: fade-in 0.75s ease-out forwards;
-  padding: auto;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translatex(20rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(10rrem);
-  }
 }
 
 #card:hover {
