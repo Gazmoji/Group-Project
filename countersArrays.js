@@ -203,3 +203,4 @@ const leagueCharacterComparisons = {
     'Zoe': ["Galio", "Twisted Fate", "Yasuo", "Lissandra", "Annie", "Jayce"],
     'Zyra': ["Sona", "Janna", "Zilean", "Amumu", "Seraphine", "Alistar"],
 }
+

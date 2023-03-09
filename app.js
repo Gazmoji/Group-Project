@@ -1,5 +1,6 @@
 const body = document.getElementById("body");
 const body2 = document.getElementById("body2");
+const title = document.getElementById("title");
 const selected = document.getElementById("selected");
 const leagueSelected = document.getElementById("leagueSelected");
 const clear = document.getElementById("clear");
@@ -11,9 +12,17 @@ const additional = document.getElementById("additional");
 const additional2 = document.getElementById("additional2");
 const additional3 = document.getElementById("additional3");
 const abilityList = document.getElementById("abilityList");
-
+const overwatchButton = document.getElementById("overwatchButton");
+const leagueButton = document.getElementById("leagueButton");
 
 //OVERWATCH------------------------------------------------
+
+overwatchButton.addEventListener("click", function () {
+  display();
+  leagueButton.remove();
+  body2.remove();
+  title.remove()
+});
 
 function display() {
   fetch("https://overfast-api.tekrop.fr/heroes")
@@ -35,7 +44,6 @@ function display() {
       body.innerHTML = heroList.join("");
     });
 }
-display();
 
 function additionalInfo(heroName) {
   counterColors(heroName)
@@ -109,12 +117,21 @@ function counterColors(heroName) {
       });
       body.innerHTML = heroList.join("");
     });
-  }
+}
 
 
 
 
 //LEAGUE OF LEGENDS------------------------------------------------
+
+leagueButton.addEventListener("click", function () {
+  displayLeague();
+  overwatchButton.remove();
+  body.remove();
+  additional.remove();
+  abilityList.remove();
+  title.remove()
+});
 
 function displayLeague() {
   fetch(
@@ -138,7 +155,7 @@ function displayLeague() {
     });
 }
 
-displayLeague();
+
 
 function additionalLeagueInfo(champName) {
   leagueCounterColors(champName)
@@ -177,7 +194,7 @@ function additionalLeagueInfo(champName) {
           return `<div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
           <div class="card">
-            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="...">
+            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="..." id="legAbil">
             <div class="card-body">
               <h5 class="card-title">${abil.name}</h5>
               <p class="card-text" id='descriptionText'>${abil.description}</p>

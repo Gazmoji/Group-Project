@@ -1,3 +1,77 @@
+.h1 {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+#overwatchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: brightness(80%);
+  animation: fade-inOverwatch 1.75s ease-out forwards
+}
+@keyframes fade-inOverwatch {
+  from {
+    opacity: 0;
+    transform: translatex(-20rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(rem);
+  }
+}
+#overwatchButton:hover {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+  opacity: 100;
+  background: url();
+  filter: brightness(100%);
+}
+
+
+#leagueButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fade-inButton 1.75s ease-out forwards;
+  background: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec6b653d-20ae-41d7-8e78-5a2ec054db72/d7nzyi4-717deda0-3474-46d1-83d5-4f064cd966ad.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjNmI2NTNkLTIwYWUtNDFkNy04ZTc4LTVhMmVjMDU0ZGI3MlwvZDduenlpNC03MTdkZWRhMC0zNDc0LTQ2ZDEtODNkNS00ZjA2NGNkOTY2YWQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.W39a-Uy9Isacf1cePghCwVuwqU3Qe2R44yLdJ3ZqWXw);
+  filter: brightness(80%);
+  padding-bottom: 250px;
+}
+@keyframes fade-inButton {
+  from {
+    opacity: 0;
+    transform: translatex(20rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(rem);
+  }
+}
+
+#leagueButton:hover {
+  animation: parallax 3.8s ease-out forwards;
+}
+
+@keyframes parallax {
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 40%;
+  }
+}
+
+#leagueButton:hover {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+  opacity: 100;
+  filter: brightness(100%);
+  backdrop-filter: brightness(50%);
+}
+
 #additional {
   padding-top: 25px;
   list-style-type: none;
@@ -183,6 +257,10 @@ body {
   }
 }
 
+#legAbil {
+  width: 75px;
+}
+
 .leagueDefault-background {
   margin-bottom: 2rem;
   border: 5px solid #4e4b4b;
@@ -355,3 +433,4 @@ h1 {
   font-weight: bold;
   flex-shrink: 10;
 }
+
