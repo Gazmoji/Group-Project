@@ -1,7 +1,6 @@
 const body = document.getElementById("body");
 const body2 = document.getElementById("body2");
 const selected = document.getElementById("selected");
-const leagueSelected = document.getElementById("leagueSelected");
 const clear = document.getElementById("clear");
 const card = document.getElementById("card");
 const cardBody = document.getElementById("cardBody");
@@ -11,7 +10,9 @@ const additional = document.getElementById("additional");
 const additional2 = document.getElementById("additional2");
 const additional3 = document.getElementById("additional3");
 const abilityList = document.getElementById("abilityList");
-
+const overwatchButton = document.getElementById("overwatchButton");
+const leagueButton = document.getElementById("leagueButton");
+let characters = [];
 
 //OVERWATCH------------------------------------------------
 
@@ -19,7 +20,7 @@ function display() {
   fetch("https://overfast-api.tekrop.fr/heroes")
     .then((response) => response.json())
     .then((information) => {
-      characters = information
+      characters = information;
       const heroList = information.map(function (stuff) {
         return `
       <a id="cardButton" onclick='additionalInfo("${stuff.key}")'>
@@ -35,11 +36,15 @@ function display() {
       body.innerHTML = heroList.join("");
     });
 }
-display();
+overwatchButton.addEventListener("click", function () {
+  display();
+  leagueButton.remove();
+  body2.remove();
+});
 
 function additionalInfo(heroName) {
-  counterColors(heroName)
-  displayCurrent(heroName)
+  counterColors(heroName);
+  displayCurrent(heroName);
   fetch(`https://overfast-api.tekrop.fr/heroes/${heroName}`, {
     method: "GET",
   })
@@ -72,7 +77,6 @@ function additionalInfo(heroName) {
       });
       additional.innerHTML = heroList;
       abilityList.innerHTML = heroAbilities.join("");
-      
     });
 }
 
@@ -83,22 +87,50 @@ function displayCurrent(heroName) {
     .then((response) => response.json())
     .then((information) => {
       const current = `
-      <div id="currentSelected">${information.name} counters</div>`    
-        selected.innerHTML = current
-  })
+      <div id="currentSelected">${information.name} counters</div>
+      <button id="clear">Clear</button>`;
+      selected.innerHTML = current;
+    });
+}
+
+function displayLeague() {
+  fetch(
+    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+  )
+    .then((response) => response.json())
+    .then((information) => {
+      let champData = information.data;
+      let champList = "";
+      for (let champ in champData) {
+        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
+        <div id="card">
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+    <div id="card-body">
+      <h5 id="card-title">${champData[champ].name}</h5>
+      </a>
+    </div>
+  </div>`;
+      }
+      body2.innerHTML = champList;
+      console.log(champData);
+    });
 }
 
 function counterColors(heroName) {
-  const listOfAllCharactersHeroCanBeat = characterComparisons[heroName]
+  const listOfAllCharactersHeroCanBeat = characterComparisons[heroName];
 
   fetch("https://overfast-api.tekrop.fr/heroes")
     .then((response) => response.json())
     .then((information) => {
-      characters = information
+      characters = information;
       const heroList = information.map(function (stuff) {
         return `
       <a id="cardButton" onclick='additionalInfo("${stuff.key}")'>
-      <div class = ${listOfAllCharactersHeroCanBeat.includes(stuff.key) ? "red-border" : "default-background"}>
+      <div class = ${
+        listOfAllCharactersHeroCanBeat.includes(stuff.key)
+          ? "red-border"
+          : "default-background"
+      }>
       <img src="${stuff.portrait}" class = "card" id="card-img-top" alt="...">
       <div id="card-body">
         <h5 id="card-title">${stuff.name}</h5>
@@ -109,8 +141,7 @@ function counterColors(heroName) {
       });
       body.innerHTML = heroList.join("");
     });
-  }
-
+}
 
 
 
@@ -138,14 +169,22 @@ function displayLeague() {
     });
 }
 
-displayLeague();
+leagueButton.addEventListener("click", function () {
+  displayLeague();
+  overwatchButton.remove();
+  body.remove();
+  additional.remove();
+  abilityList.remove();
+});
 
 function additionalLeagueInfo(champName) {
-  leagueCounterColors(champName)
-  displayCurrentLeague(champName)
-  fetch(`http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
+  leagueCounterColors(champName);
+  fetch(
+    `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
+    {
       method: "GET",
-    })
+    }
+  )
     .then((response) => response.json())
     .then((information) => {
       console.log(information);
@@ -177,7 +216,7 @@ function additionalLeagueInfo(champName) {
           return `<div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
           <div class="card">
-            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="...">
+            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="..." id='legAbil'>
             <div class="card-body">
               <h5 class="card-title">${abil.name}</h5>
               <p class="card-text" id='descriptionText'>${abil.description}</p>
@@ -192,24 +231,8 @@ function additionalLeagueInfo(champName) {
     });
 }
 
-function displayCurrentLeague(champName) {
-  fetch(`http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
-      method: "GET",
-    })
-    .then((response) => response.json())
-    .then((information) => {
-      let champData = information.data;
-      let current = "";
-      for (let champ in champData) {
-      let current = `
-      <div id="currentSelectedLeague">${champData[champ].name} counters</div>`    
-      leagueSelected.innerHTML = current
-      }
-    })
-}
-
 function leagueCounterColors(champName) {
-  const listOfAllChampsSelectedCanBeat = leagueCharacterComparisons[champName]
+  const listOfAllChampsSelectedCanBeat = leagueCharacterComparisons[champName];
   fetch(
     "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
   )
@@ -218,9 +241,17 @@ function leagueCounterColors(champName) {
       let champData = information.data;
       let champList = "";
       for (let champ in champData) {
-        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
-        <div class = ${listOfAllChampsSelectedCanBeat.includes(champData[champ].id) ? "leagueRed-border" : "leagueDefault-background"}>
-        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+        champList += `<a onclick='additionalLeagueInfo("${
+          champData[champ].id
+        }")'>
+        <div class = ${
+          listOfAllChampsSelectedCanBeat.includes(champData[champ].id)
+            ? "leagueRed-border"
+            : "leagueDefault-background"
+        }>
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${
+          champData[champ].image.full
+        }" class = "card" id="card-img-top" alt="...">
     <div id="card-body">
       <h5 id="card-title">${champData[champ].name}</h5>
       </a>
@@ -230,5 +261,4 @@ function leagueCounterColors(champName) {
       body2.innerHTML = champList;
       console.log(champData);
     });
-
 }
