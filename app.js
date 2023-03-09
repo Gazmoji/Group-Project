@@ -1,6 +1,7 @@
 const body = document.getElementById("body");
 const body2 = document.getElementById("body2");
 const selected = document.getElementById("selected");
+const leagueSelected = document.getElementById("leagueSelected");
 const clear = document.getElementById("clear");
 const card = document.getElementById("card");
 const cardBody = document.getElementById("cardBody");
@@ -10,7 +11,7 @@ const additional = document.getElementById("additional");
 const additional2 = document.getElementById("additional2");
 const additional3 = document.getElementById("additional3");
 const abilityList = document.getElementById("abilityList");
-let characters = []
+
 
 //OVERWATCH------------------------------------------------
 
@@ -85,7 +86,6 @@ function displayCurrent(heroName) {
       <div id="currentSelected">${information.name} counters</div>`    
         selected.innerHTML = current
   })
-  
 }
 
 function counterColors(heroName) {
@@ -178,12 +178,10 @@ displayLeague();
 
 function additionalLeagueInfo(champName) {
   leagueCounterColors(champName)
-  fetch(
-    `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
-    {
+  displayCurrentLeague(champName)
+  fetch(`http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
       method: "GET",
-    }
-  )
+    })
     .then((response) => response.json())
     .then((information) => {
       console.log(information);
@@ -228,6 +226,22 @@ function additionalLeagueInfo(champName) {
         additional3.innerHTML = leagueAbilities.join("");
       }
     });
+}
+
+function displayCurrentLeague(champName) {
+  fetch(`http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
+      method: "GET",
+    })
+    .then((response) => response.json())
+    .then((information) => {
+      let champData = information.data;
+      let current = "";
+      for (let champ in champData) {
+      let current = `
+      <div id="currentSelectedLeague">${champData[champ].name} counters</div>`    
+      leagueSelected.innerHTML = current
+      }
+    })
 }
 
 function leagueCounterColors(champName) {
