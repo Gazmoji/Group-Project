@@ -21,7 +21,10 @@ overwatchButton.addEventListener("click", function () {
   display();
   leagueButton.remove();
   body2.remove();
-  title.remove()
+  title.remove();
+  overwatchButton.remove()
+  additional.style.display = "block";
+  abilityList.style.display = "block";
 });
 
 function display() {
@@ -131,6 +134,7 @@ leagueButton.addEventListener("click", function () {
   additional.remove();
   abilityList.remove();
   title.remove()
+  leagueButton.remove();
 });
 
 function displayLeague() {
@@ -249,3 +253,32 @@ function leagueCounterColors(champName) {
     });
 
 }
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let interval = null;
+const counterstitle = document.getElementById("title");
+
+function startAnimation() {
+  let iteration = 0;
+  clearInterval(interval);
+
+  interval = setInterval(() => {
+    counterstitle.innerText = counterstitle.innerText.split("")
+      .map((letter, index) => {
+        if(index < iteration) {
+          return counterstitle.dataset.value[index];
+        }
+        return letters[Math.floor(Math.random() * 26)];
+      })
+      .join("");
+
+    if(iteration >= 18) {
+      clearInterval(interval);
+    }
+
+    iteration += 1 / 3;
+  }, 30);
+}
+
+startAnimation();
+
+
