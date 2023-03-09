@@ -10,7 +10,11 @@ const additional = document.getElementById("additional");
 const additional2 = document.getElementById("additional2");
 const additional3 = document.getElementById("additional3");
 const abilityList = document.getElementById("abilityList");
+const overwatchButton = document.getElementById("overwatchButton");
+const leagueButton = document.getElementById("leagueButton");
 let characters = [];
+
+//OVERWATCH------------------------------------------------
 
 function display() {
   fetch("https://overfast-api.tekrop.fr/heroes")
@@ -32,7 +36,11 @@ function display() {
       body.innerHTML = heroList.join("");
     });
 }
-display();
+overwatchButton.addEventListener("click", function () {
+  display();
+  leagueButton.remove();
+  body2.remove();
+});
 
 function additionalInfo(heroName) {
   counterColors(heroName);
@@ -688,9 +696,40 @@ const characterComparisons = {
   ],
 };
 
-displayLeague();
+//LEAGUE OF LEGENDS------------------------------------------------
+
+function displayLeague() {
+  fetch(
+    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+  )
+    .then((response) => response.json())
+    .then((information) => {
+      let champData = information.data;
+      let champList = "";
+      for (let champ in champData) {
+        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
+        <div id="leagueCard">
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+    <div id="card-body">
+      <h5 id="leagueCard-title">${champData[champ].name}</h5>
+      </a>
+    </div>
+  </div>`;
+      }
+      body2.innerHTML = champList;
+    });
+}
+
+leagueButton.addEventListener("click", function () {
+  displayLeague();
+  overwatchButton.remove();
+  body.remove();
+  additional.remove();
+  abilityList.remove();
+});
 
 function additionalLeagueInfo(champName) {
+  leagueCounterColors(champName);
   fetch(
     `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
     {
@@ -701,9 +740,7 @@ function additionalLeagueInfo(champName) {
     .then((information) => {
       console.log(information);
       let champData = information.data;
-      console.log(champData);
       let leagueList = "";
-      console.log(abilityList);
 
       for (let champ in champData) {
         leagueList += `<li>
@@ -730,7 +767,7 @@ function additionalLeagueInfo(champName) {
           return `<div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
           <div class="card">
-            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="...">
+            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="..." id='legAbil'>
             <div class="card-body">
               <h5 class="card-title">${abil.name}</h5>
               <p class="card-text" id='descriptionText'>${abil.description}</p>
@@ -742,6 +779,38 @@ function additionalLeagueInfo(champName) {
         additional2.innerHTML = leagueList;
         additional3.innerHTML = leagueAbilities.join("");
       }
+    });
+}
+
+function leagueCounterColors(champName) {
+  const listOfAllChampsSelectedCanBeat = leagueCharacterComparisons[champName];
+  fetch(
+    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+  )
+    .then((response) => response.json())
+    .then((information) => {
+      let champData = information.data;
+      let champList = "";
+      for (let champ in champData) {
+        champList += `<a onclick='additionalLeagueInfo("${
+          champData[champ].id
+        }")'>
+        <div class = ${
+          listOfAllChampsSelectedCanBeat.includes(champData[champ].id)
+            ? "leagueRed-border"
+            : "leagueDefault-background"
+        }>
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${
+          champData[champ].image.full
+        }" class = "card" id="card-img-top" alt="...">
+    <div id="card-body">
+      <h5 id="card-title">${champData[champ].name}</h5>
+      </a>
+    </div>
+  </div>`;
+      }
+      body2.innerHTML = champList;
+      console.log(champData);
     });
 }
 
