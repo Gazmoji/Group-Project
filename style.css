@@ -46,8 +46,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-position-x: 15%;
   animation: fade-inButton 1.75s ease-out forwards;
   background: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ec6b653d-20ae-41d7-8e78-5a2ec054db72/d7nzyi4-717deda0-3474-46d1-83d5-4f064cd966ad.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2VjNmI2NTNkLTIwYWUtNDFkNy04ZTc4LTVhMmVjMDU0ZGI3MlwvZDduenlpNC03MTdkZWRhMC0zNDc0LTQ2ZDEtODNkNS00ZjA2NGNkOTY2YWQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.W39a-Uy9Isacf1cePghCwVuwqU3Qe2R44yLdJ3ZqWXw);
+  background-position: 15% 0;
   filter: brightness(60%);
   padding-bottom: 150px;
 }
@@ -275,7 +277,7 @@ body {
   margin-bottom: 2rem;
   border: 5px solid #4e4b4b;
   border-radius: 0.5rem;
-  width: 5%;
+  width: 75px;
   transition: all 0.3s ease-out;
   transform: scale(1);
   /* opacity: 50%; */
@@ -295,7 +297,7 @@ body {
   margin-bottom: 2rem;
   border: 5px solid #c91d1d;
   border-radius: 0.5rem;
-  width: 5%;
+  width: 75px;
   transition: all 0.3s ease-out;
   transform: scale(1);
   /* animation: fade-in 0.75s ease-out forwards; */
@@ -431,9 +433,57 @@ h1 {
 @media (min-width: 320px) and (max-width: 884px) {
   #overwatchButton img {
     width: 50%;
+    padding-top: 0;
+  }
+  #overwatchButton {
+    padding-top: 0;
+  }
+  #overwatchButton:hover {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1);
+    opacity: 100;
+    background-image: 100%;
+    cursor: pointer;
+    filter: brightness(100%);
+    animation: parallaxOw 1.8s ease forwards;
+  }
+  @keyframes parallaxOw {
+    from {
+      animation: ease;
+      background-size: 100%;
+    }
+    to {
+      animation: ease;
+      background-size: 150%;
+    }
   }
   #leagueButton img {
     width: 50%;
+  }
+  
+  
+  #leagueButton:hover {
+    animation: parallax 2.8s ease forwards;
+    cursor: pointer;
+  }
+  
+  @keyframes parallax {
+    from {
+      background-position-x: 10%;
+      background-position-y: 0px;
+    }
+    to {
+      background-position-x: 55%;
+      background-position-y: -300px;
+    }
+  }
+  
+  #leagueButton:hover {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transform: scale(1);
+    opacity: 100;
+    filter: brightness(100%);
+    backdrop-filter: brightness(50%);
   }
   #abilityList img {
     max-width: 200px;
@@ -449,6 +499,12 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     flex-shrink: 2;
+  }
+  #body2 {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 2;
+    flex-basis: calc(var(--modifier) * 999)
   }
 
   #card-title{
