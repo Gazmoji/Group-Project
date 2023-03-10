@@ -143,7 +143,7 @@ leagueButton.addEventListener("click", function () {
 
 function displayLeague() {
   fetch(
-    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+    "https://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
   )
     .then((response) => response.json())
     .then((information) => {
@@ -152,7 +152,7 @@ function displayLeague() {
       for (let champ in champData) {
         champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
         <div id="leagueCard">
-        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+        <img src="https://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
     <div id="card-body">
       <h5 id="leagueCard-title">${champData[champ].name}</h5>
       </a>
@@ -201,7 +201,7 @@ function additionalLeagueInfo(champName) {
           return `<div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
           <div class="card">
-            <img src='http://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="..." id="legAbil">
+            <img src='https://ddragon.leagueoflegends.com/cdn/13.4.1/img/spell/${abil.image.full}' class="card-img-top" alt="..." id="legAbil">
             <div class="card-body">
               <h5 class="card-title">${abil.name}</h5>
               <p class="card-text" id='descriptionText'>${abil.description}</p>
@@ -218,7 +218,7 @@ function additionalLeagueInfo(champName) {
 
 function displayCurrentLeague(champName) {
   fetch(
-    `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
+    `https://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
     {
       method: "GET",
     }
@@ -253,7 +253,7 @@ function leagueCounterColors(champName) {
             ? "leagueRed-border"
             : "leagueDefault-background"
         }>
-        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${
+        <img src="https://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${
           champData[champ].image.full
         }" class = "card" id="card-img-top" alt="...">
     <div id="card-body">

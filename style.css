@@ -116,7 +116,7 @@ body {
   margin-bottom: 1rem;
   border: 10px solid #4e4b4b;
   border-radius: 0.5rem;
-  width: 8%;
+  width: 150px;
   transition: all 0.3s ease-out;
   transform: scale(1);
   /* opacity: 50%; */
@@ -155,7 +155,7 @@ body {
   margin-bottom: 2rem;
   border: 10px solid #4e4b4b;
   border-radius: 0.5rem;
-  width: 8%;
+  width: 150px;
   transition: all 0.3s ease-out;
   transform: scale(1);
   /* opacity: 50%; */
@@ -213,7 +213,7 @@ body {
   }
   to {
     opacity: 1;
-    transform: translateY(10rrem);
+    transform: translateY(0rem);
   }
 }
 
@@ -221,7 +221,7 @@ body {
   margin-bottom: 2rem;
   border: 5px solid #c91d1d;
   border-radius: 0.5rem;
-  width: 8%;
+  width: 150px;
   transition: all 0.3s ease-out;
   transform: scale(1);
   /* animation: fade-in 0.75s ease-out forwards; */
@@ -241,7 +241,7 @@ body {
   margin-bottom: 2rem;
   border: 5px solid #4e4b4b;
   border-radius: 0.5rem;
-  width: 5%;
+  width: 75px;
   transition: all 0.3s ease-out;
   transform: scale(1);
   /* opacity: 50%; */
@@ -428,7 +428,7 @@ h1 {
   flex-shrink: 10;
 }
 
-@media only screen and (max-width: 768px) {
+@media (min-width: 320px) and (max-width: 884px) {
   #overwatchButton img {
     width: 50%;
   }
@@ -443,6 +443,19 @@ h1 {
   #additional2 img {
     max-width: 200px;
     height: auto;
+  }
+
+  #body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 2;
+  }
+
+  #card-title{
+    width: 50%;
+  }
+  #card-text{
+    font-size: 50%;
   }
 
   #additional3 img {
