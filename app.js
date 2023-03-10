@@ -134,7 +134,7 @@ leagueButton.addEventListener("click", function () {
   additional.remove();
   abilityList.remove();
   title.remove()
-  leagueButton.remove();
+  leagueButton.remove()
 });
 
 function displayLeague() {
@@ -281,4 +281,6 @@ function startAnimation() {
 
 startAnimation();
 
-
+counterstitle.onmouseover = () => {
+  startAnimation();
+};
