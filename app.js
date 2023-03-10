@@ -1,3 +1,4 @@
+//VARIABLES------------------------------------------------
 const body = document.getElementById("body");
 const body2 = document.getElementById("body2");
 const title = document.getElementById("title");
@@ -14,6 +15,9 @@ const additional3 = document.getElementById("additional3");
 const abilityList = document.getElementById("abilityList");
 const overwatchButton = document.getElementById("overwatchButton");
 const leagueButton = document.getElementById("leagueButton");
+const letters = "ABCDEFGHIJK1234567890!@#$%^&*()LMNOPQRSTUVWXYZ";
+let interval = null;
+const counterstitle = document.getElementById("title");
 
 //OVERWATCH------------------------------------------------
 
@@ -164,7 +168,7 @@ function displayLeague() {
 function additionalLeagueInfo(champName) {
   leagueCounterColors(champName)
   displayCurrentLeague(champName)
-  fetch(`http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
+  fetch(`https://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
       method: "GET",
     })
     .then((response) => response.json())
@@ -179,7 +183,7 @@ function additionalLeagueInfo(champName) {
       <h2>Champion: ${champData[champ].name}</h2>
       
       <p id='blurb'>About: ${champData[champ].blurb}</p>
-      <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" id='port'>
+      <img src="https://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" id='port'>
       <p id='origin'>Lore: ${champData[champ].lore}</p>
       <p id='origin'>Resource Type: ${champData[champ].partype}</p>
       <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -232,7 +236,7 @@ function displayCurrentLeague(champName) {
 function leagueCounterColors(champName) {
   const listOfAllChampsSelectedCanBeat = leagueCharacterComparisons[champName]
   fetch(
-    "http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
+    "https://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
   )
     .then((response) => response.json())
     .then((information) => {
@@ -253,9 +257,7 @@ function leagueCounterColors(champName) {
     });
 
 }
-const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-let interval = null;
-const counterstitle = document.getElementById("title");
+
 
 function startAnimation() {
   let iteration = 0;
@@ -267,7 +269,7 @@ function startAnimation() {
         if(index < iteration) {
           return counterstitle.dataset.value[index];
         }
-        return letters[Math.floor(Math.random() * 26)];
+        return letters[Math.floor(Math.random() * 46)];
       })
       .join("");
 

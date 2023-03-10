@@ -90,12 +90,14 @@ body {
   margin-bottom: -5pxpx;
 }
 
-#overwatchContainer {
+/* #overwatchContainer {
   width: 100%;
   height: 100%;
   align-items: center;
   justify-content: space-around;
-}
+} */
+
+
 
 #body {
   display: flex;
@@ -104,6 +106,8 @@ body {
   align-items: center;
   margin-top: 1rem;
 }
+
+
 
 #body,
 .card {
@@ -425,10 +429,10 @@ h1 {
   background-color: #6d6969;
   border-radius: 0.5rem;
   font-size: 0.875rem;
-  font-weight: bold;
+  font-weight: 200;
   margin-bottom: 0rem;
   font-size: 0.75rem;
-  font-weight: bold;
+  font-weight: bolder;
   flex-shrink: 10;
 }
 
