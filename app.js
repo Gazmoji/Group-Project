@@ -26,7 +26,7 @@ overwatchButton.addEventListener("click", function () {
   leagueButton.remove();
   body2.remove();
   title.remove();
-  overwatchButton.remove()
+  overwatchButton.remove();
   additional.style.display = "block";
   abilityList.style.display = "block";
 });
@@ -35,7 +35,7 @@ function display() {
   fetch("https://overfast-api.tekrop.fr/heroes")
     .then((response) => response.json())
     .then((information) => {
-      characters = information
+      characters = information;
       const heroList = information.map(function (stuff) {
         return `
       <a id="cardButton" onclick='additionalInfo("${stuff.key}")'>
@@ -53,8 +53,8 @@ function display() {
 }
 
 function additionalInfo(heroName) {
-  counterColors(heroName)
-  displayCurrent(heroName)
+  counterColors(heroName);
+  displayCurrent(heroName);
   fetch(`https://overfast-api.tekrop.fr/heroes/${heroName}`, {
     method: "GET",
   })
@@ -87,7 +87,6 @@ function additionalInfo(heroName) {
       });
       additional.innerHTML = heroList;
       abilityList.innerHTML = heroAbilities.join("");
-      
     });
 }
 
@@ -98,22 +97,26 @@ function displayCurrent(heroName) {
     .then((response) => response.json())
     .then((information) => {
       const current = `
-      <div id="currentSelected">${information.name} counters</div>`    
-        selected.innerHTML = current
-  })
+      <div id="currentSelected">${information.name} counters</div>`;
+      selected.innerHTML = current;
+    });
 }
 
 function counterColors(heroName) {
-  const listOfAllCharactersHeroCanBeat = characterComparisons[heroName]
+  const listOfAllCharactersHeroCanBeat = characterComparisons[heroName];
 
   fetch("https://overfast-api.tekrop.fr/heroes")
     .then((response) => response.json())
     .then((information) => {
-      characters = information
+      characters = information;
       const heroList = information.map(function (stuff) {
         return `
       <a id="cardButton" onclick='additionalInfo("${stuff.key}")'>
-      <div class = ${listOfAllCharactersHeroCanBeat.includes(stuff.key) ? "red-border" : "default-background"}>
+      <div class = ${
+        listOfAllCharactersHeroCanBeat.includes(stuff.key)
+          ? "red-border"
+          : "default-background"
+      }>
       <img src="${stuff.portrait}" class = "card" id="card-img-top" alt="...">
       <div id="card-body">
         <h5 id="card-title">${stuff.name}</h5>
@@ -126,9 +129,6 @@ function counterColors(heroName) {
     });
 }
 
-
-
-
 //LEAGUE OF LEGENDS------------------------------------------------
 
 leagueButton.addEventListener("click", function () {
@@ -137,8 +137,8 @@ leagueButton.addEventListener("click", function () {
   body.remove();
   additional.remove();
   abilityList.remove();
-  title.remove()
-  leagueButton.remove()
+  title.remove();
+  leagueButton.remove();
 });
 
 function displayLeague() {
@@ -163,14 +163,13 @@ function displayLeague() {
     });
 }
 
-
-
 function additionalLeagueInfo(champName) {
   leagueCounterColors(champName)
   displayCurrentLeague(champName)
   fetch(`https://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
       method: "GET",
-    })
+    }
+  )
     .then((response) => response.json())
     .then((information) => {
       console.log(information);
@@ -218,23 +217,26 @@ function additionalLeagueInfo(champName) {
 }
 
 function displayCurrentLeague(champName) {
-  fetch(`http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`, {
+  fetch(
+    `http://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion/${champName}.json`,
+    {
       method: "GET",
-    })
+    }
+  )
     .then((response) => response.json())
     .then((information) => {
       let champData = information.data;
       let current = "";
       for (let champ in champData) {
-      let current = `
-      <div id="currentSelectedLeague">${champData[champ].name} counters</div>`    
-      leagueSelected.innerHTML = current
+        let current = `
+      <div id="currentSelectedLeague">${champData[champ].name} counters</div>`;
+        leagueSelected.innerHTML = current;
       }
-    })
+    });
 }
 
 function leagueCounterColors(champName) {
-  const listOfAllChampsSelectedCanBeat = leagueCharacterComparisons[champName]
+  const listOfAllChampsSelectedCanBeat = leagueCharacterComparisons[champName];
   fetch(
     "https://ddragon.leagueoflegends.com/cdn/13.4.1/data/en_US/champion.json"
   )
@@ -243,9 +245,17 @@ function leagueCounterColors(champName) {
       let champData = information.data;
       let champList = "";
       for (let champ in champData) {
-        champList += `<a onclick='additionalLeagueInfo("${champData[champ].id}")'>
-        <div class = ${listOfAllChampsSelectedCanBeat.includes(champData[champ].id) ? "leagueRed-border" : "leagueDefault-background"}>
-        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${champData[champ].image.full}" class = "card" id="card-img-top" alt="...">
+        champList += `<a onclick='additionalLeagueInfo("${
+          champData[champ].id
+        }")'>
+        <div class = ${
+          listOfAllChampsSelectedCanBeat.includes(champData[champ].id)
+            ? "leagueRed-border"
+            : "leagueDefault-background"
+        }>
+        <img src="http://ddragon.leagueoflegends.com/cdn/13.4.1/img/champion/${
+          champData[champ].image.full
+        }" class = "card" id="card-img-top" alt="...">
     <div id="card-body">
       <h5 id="card-title">${champData[champ].name}</h5>
       </a>
@@ -255,7 +265,6 @@ function leagueCounterColors(champName) {
       body2.innerHTML = champList;
       console.log(champData);
     });
-
 }
 
 
@@ -264,16 +273,17 @@ function startAnimation() {
   clearInterval(interval);
 
   interval = setInterval(() => {
-    counterstitle.innerText = counterstitle.innerText.split("")
+    counterstitle.innerText = counterstitle.innerText
+      .split("")
       .map((letter, index) => {
-        if(index < iteration) {
+        if (index < iteration) {
           return counterstitle.dataset.value[index];
         }
         return letters[Math.floor(Math.random() * 46)];
       })
       .join("");
 
-    if(iteration >= 18) {
+    if (iteration >= 18) {
       clearInterval(interval);
     }
 
