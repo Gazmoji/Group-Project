@@ -127,7 +127,7 @@ body {
   filter: brightness(100%);
 }
 
-@keyframes fade-in {
+@keyframes fade-inSelected {
   from {
     opacity: 0;
     transform: translatex(20rem);
@@ -445,4 +445,87 @@ h1 {
     max-width: 200px;
     height: auto;
   }
+}
+
+.card-img-top {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  text-align: center;
+}
+
+#role {
+  padding-top: 25px;
+}
+
+#origin {
+  font-stretch: expanded;
+  font-size: 18px;
+}
+
+.card {
+  width: 250px;
+  height: 250px;
+  justify-content: center;
+}
+
+.port {
+  border: 3px gray;
+}
+
+/* can look cool if commented out nd wordked on */
+#card-img-top {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+#card-body {
+  padding: 1rem;
+}
+
+#leagueCard-title {
+  margin-bottom: 0.25rem;
+  background-color: #5a5858;
+  border-radius: 0.5rem;
+  font-size: 0.55rem;
+  font-weight: bold;
+  margin-bottom: 0rem;
+  font-weight: bold;
+  flex-shrink: 10;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h1 {
+  text-align: center;
+}
+
+#role {
+  padding-top: 25px;
+}
+
+#origin {
+  font-stretch: expanded;
+  font-size: 18px;
+}
+
+#card:hover {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+  transform: scale(1.05);
+}
+
+#card-title {
+  margin-bottom: 0.5rem;
+  background-color: #6d6969;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: bold;
+  margin-bottom: 0rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  flex-shrink: 10;
 }
