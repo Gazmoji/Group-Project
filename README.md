@@ -7,7 +7,7 @@
    The app is featured with creative designs and functionalities in each page including related animations and an intro video on the home page. The contributers used the Overwatch 2 API and League of Legends API to display all the information is a clear, concise place. In addition, since the API's are constantly updated, whenever there is a new champion/hero release, they will automatically be added to the webpage.
    
  ## Live link: 
-https://weakagainst.surge.sh/
+https://weak-against.surge.sh/
 
 ## Featured programs: 
 HTML, CSS, Bootstrap, JavaScript
