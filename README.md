@@ -9,6 +9,9 @@
  ## Live link: 
 https://weak-against.surge.sh/
 
+## Video Demo Link: 
+https://www.youtube.com/watch?v=6ZkWX4pvsro
+
 ## Featured programs: 
 HTML, CSS, Bootstrap, JavaScript
 
